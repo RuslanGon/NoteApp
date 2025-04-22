@@ -1,10 +1,12 @@
 import "./App.css";
+import Signup from "./pages/Singup.jsx";
 
 function App() {
   return (
-    <>
-      <h1>Hello</h1>
-    </>
+   <div >
+    <h1>Note App</h1>
+    <Signup />
+   </div>
   );
 }
 
