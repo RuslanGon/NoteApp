@@ -24,4 +24,14 @@ router.post('/add', middleware, async (req, res) => {
   }
 });
 
+router.get('/', async (req, res) => {
+    try {
+      const notes = await NoteModel.find();
+      return res.status(200).json({ notes }); 
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ message: 'Server error while fetching notes' }); 
+    }
+  });
+
 export default router;
