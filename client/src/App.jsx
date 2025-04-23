@@ -6,7 +6,7 @@ import Login from './pages/Login.jsx';
 function App() {
   return (
     <Routes>
-      <Route path="/signup" element={<Signup/>} />
+      <Route path="/register" element={<Signup/>} />
       <Route path="/login" element={<Login />} />
     </Routes>
   );
