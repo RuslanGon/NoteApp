@@ -1,36 +1,12 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
 
-const NoteModel = ({closeModal}) => {
+const NoteModel = ({closeModal, addNote}) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
-
-  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const token = localStorage.getItem('token');
-  
-      const response = await axios.post(
-        "http://localhost:5000/api/note/add",
-        { title, description },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-  
-      console.log("Note added successfully:", response.data);
-      setSuccessMessage("Note added! Redirecting...");
-      setTimeout(() => navigate("/"), 1500); 
-      closeModal()
-    } catch (error) {
-      console.error("Failed to add note:", error);
-    }
+    addNote(title, description)
   };
 
   return (
@@ -86,9 +62,6 @@ const NoteModel = ({closeModal}) => {
           >
             Cancel
           </button>
-          {successMessage && (
-            <p className="text-green-600 text-center">{successMessage}</p>
-          )}
         </form>
       </div>
     </div>

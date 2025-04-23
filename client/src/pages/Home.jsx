@@ -2,20 +2,18 @@ import React, { useState } from 'react'
 import Navbar from '../components/Navbar.jsx'
 import NoteModel from '../components/NoteModel.jsx'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'
 
 const Home = () => {
-const navigate = useNavigate()
+// const navigate = useNavigate()
 const [isModel, setIsModel] = useState(false)  
 const closeModal = () => {
   setIsModel(false)
 }
 
-const addNote = async (e) => {
-  e.preventDefault();
+const addNote = async (title, description) => {
   try {
     const token = localStorage.getItem('token');
-
     const response = await axios.post(
       "http://localhost:5000/api/note/add",
       { title, description },
@@ -25,9 +23,8 @@ const addNote = async (e) => {
         },
       }
     );
-
     console.log("Note added successfully:", response.data);
-    setTimeout(() => navigate("/"), 1500); 
+    // setTimeout(() => navigate("/"), 1500); 
     closeModal()
   } catch (error) {
     console.error("Failed to add note:", error);
@@ -41,7 +38,7 @@ const addNote = async (e) => {
       className='fixed right-4 bottom-4 text-2xl bg-teal-500 text-white font-bold p-4 rounded-full'>
         +
       </button>
-      {isModel && <NoteModel closeModal={closeModal}/>}
+      {isModel && <NoteModel closeModal={closeModal} addNote={addNote}/>}
     </div>
   )
 }
