@@ -19,7 +19,7 @@ const Navbar = () => {
         <Link className="bg-blue-500 px-4 py-2 rounded mr-4" to="/login">
           Login
         </Link>
-        <Link className="bg-blue-500 px-4 py-2 rounded mr-4" to="/register">
+        <Link className="bg-green-500 px-4 py-2 rounded mr-4" to="/register">
           Sing Up
         </Link>
         <button onClick={handleLogout} className="bg-red-400 px-4 py-2 rounded">
