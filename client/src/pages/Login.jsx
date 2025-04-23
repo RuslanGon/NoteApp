@@ -1,6 +1,28 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Login = () => {
+
+  const [email, setEmail] = useState('')  
+
+  const [password, setPassword] = useState('') 
+  const [successMessage, setSuccessMessage] = useState(''); 
+  const navigate = useNavigate()
+  
+  const handleSubmit = async (e) => {
+    e.preventDefault(); 
+  try {
+    const response = await axios.post('http://localhost:5000/api/auth/login', {email, password})
+    console.log('Login success:', response.data)
+    setSuccessMessage('Login successful! Logining...');
+    localStorage.setItem('token', response.data.token)
+    setTimeout(() => navigate('/'), 1500)
+  } catch (error) {
+    console.log(error);
+  }
+  }  
+
     return (
       <div className="flex justify-center items-center h-screen bg-gray-100">
         <div
@@ -10,7 +32,7 @@ const Login = () => {
           <h2 className="text-2xl font-bold text-center text-blue-600 mb-6">
             Login
           </h2>
-          <form className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label
                 htmlFor="email"
@@ -19,6 +41,7 @@ const Login = () => {
                 Email
               </label>
               <input
+               onChange={(e) => setEmail(e.target.value)}
                 type="email"
                 id="email"
                 placeholder="Enter your email"
@@ -33,6 +56,7 @@ const Login = () => {
                 Password
               </label>
               <input
+               onChange={(e) => setPassword(e.target.value)}
                 type="password"
                 id="password"
                 placeholder="*****"
@@ -53,6 +77,9 @@ const Login = () => {
               Sing Up
             </Link>{" "}
           </p>
+          {successMessage && (
+            <p className="text-green-600 text-center">{successMessage}</p>
+          )}
           </form>
         </div>
       </div>
