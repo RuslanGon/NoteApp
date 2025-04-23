@@ -1,7 +1,8 @@
 
 const NoteCard = ({note}) => {
+    console.log(note);
   return (
-    <div>NoteCard</div>
+    <div></div>
   )
 }
 
