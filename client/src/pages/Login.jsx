@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useAuth } from "../contex/ContexProvider.jsx";
 
 const Login = () => {
 
@@ -9,6 +10,7 @@ const Login = () => {
   const [password, setPassword] = useState('') 
   const [successMessage, setSuccessMessage] = useState(''); 
   const navigate = useNavigate()
+  const {login} = useAuth()
   
   const handleSubmit = async (e) => {
     e.preventDefault(); 
@@ -16,6 +18,7 @@ const Login = () => {
     const response = await axios.post('http://localhost:5000/api/auth/login', {email, password})
     console.log('Login success:', response.data)
     setSuccessMessage('Login successful! Logining...');
+    login(response.data.user)
     localStorage.setItem('token', response.data.token)
     setTimeout(() => navigate('/'), 1500)
   } catch (error) {
