@@ -1,6 +1,23 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from 'axios'
 
 const Signup = () => {
+
+const [email, setEmail] = useState('')  
+const [name, setName] = useState('') 
+const [password, setPassword] = useState('')  
+
+const handleSubmit = async (e) => {
+  e.preventDefault(); 
+try {
+  const response = await axios.post('http://localhost:5000/api/auth/register', {name, email, password})
+  console.log('Registration success:', response.data)
+} catch (error) {
+  console.log(error);
+}
+}
+
   return (
     <div className="flex justify-center items-center h-screen bg-gray-100">
       <div
@@ -10,7 +27,7 @@ const Signup = () => {
         <h2 className="text-2xl font-bold text-center text-blue-600 mb-6">
           Signup
         </h2>
-        <form className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label
               htmlFor="name"
@@ -19,6 +36,7 @@ const Signup = () => {
               Name
             </label>
             <input
+            onChange={e => setName(e.target.value)}
               type="text"
               id="name"
               placeholder="Enter your name"
@@ -33,6 +51,7 @@ const Signup = () => {
               Email
             </label>
             <input
+            onChange={e => setEmail(e.target.value)}
               type="email"
               id="email"
               placeholder="Enter your email"
@@ -47,6 +66,7 @@ const Signup = () => {
               Password
             </label>
             <input
+            onChange={e => setPassword(e.target.value)}
               type="password"
               id="password"
               placeholder="*****"
