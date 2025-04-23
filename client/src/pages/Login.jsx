@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 
 const Login = () => {
     return (
@@ -10,20 +11,6 @@ const Login = () => {
             Login
           </h2>
           <form className="space-y-4">
-            <div>
-              <label
-                htmlFor="name"
-                className="block text-gray-700 font-semibold mb-1"
-              >
-                Name
-              </label>
-              <input
-                type="text"
-                id="name"
-                placeholder="Enter your name"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-              />
-            </div>
             <div>
               <label
                 htmlFor="email"
@@ -60,6 +47,12 @@ const Login = () => {
                 Login
               </button>
             </div>
+            <p className="flex justify-center items-center mt-4">
+            Don't have account?{" "}
+            <Link className="ml-4" to="/register">
+              Sing Up
+            </Link>{" "}
+          </p>
           </form>
         </div>
       </div>

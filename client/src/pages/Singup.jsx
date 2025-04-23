@@ -6,7 +6,8 @@ const Signup = () => {
 
 const [email, setEmail] = useState('')  
 const [name, setName] = useState('') 
-const [password, setPassword] = useState('')  
+const [password, setPassword] = useState('') 
+const [successMessage, setSuccessMessage] = useState(''); 
 const navigate = useNavigate()
 
 const handleSubmit = async (e) => {
@@ -14,7 +15,8 @@ const handleSubmit = async (e) => {
 try {
   const response = await axios.post('http://localhost:5000/api/auth/register', {name, email, password})
   console.log('Registration success:', response.data)
-  navigate('/login')
+  setSuccessMessage('Registration successful! Redirecting...');
+  setTimeout(() => navigate('/login'), 1500)
 } catch (error) {
   console.log(error);
 }
@@ -38,7 +40,7 @@ try {
               Name
             </label>
             <input
-            onChange={e => setName(e.target.value)}
+              onChange={(e) => setName(e.target.value)}
               type="text"
               id="name"
               placeholder="Enter your name"
@@ -53,7 +55,7 @@ try {
               Email
             </label>
             <input
-            onChange={e => setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
               type="email"
               id="email"
               placeholder="Enter your email"
@@ -68,7 +70,7 @@ try {
               Password
             </label>
             <input
-            onChange={e => setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
               type="password"
               id="password"
               placeholder="*****"
@@ -83,7 +85,15 @@ try {
               Sign Up
             </button>
           </div>
-          <p className="flex justify-center items-center mt-4">Already have an account? <Link className="ml-4" to='/login'>login</Link> </p>
+          <p className="flex justify-center items-center mt-4">
+            Already have an account?{" "}
+            <Link className="ml-4" to="/login">
+              login
+            </Link>{" "}
+          </p>
+          {successMessage && (
+            <p className="text-green-600 text-center">{successMessage}</p>
+          )}
         </form>
       </div>
     </div>
