@@ -6,7 +6,13 @@ const NoteModel = ({closeModal, addNote}) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    addNote(title, description)
+  
+    if (!title.trim() || !description.trim()) {
+      alert("Please fill in both title and description.");
+      return;
+    }
+  
+    addNote(title.trim(), description.trim());
   };
 
   return (
@@ -15,7 +21,7 @@ const NoteModel = ({closeModal, addNote}) => {
         <h2 className="text-2xl font-bold text-center text-blue-600 mb-6">
           Add New Note
         </h2>
-        <form onClick={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label
               htmlFor="title"

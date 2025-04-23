@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar.jsx'
 import NoteModel from '../components/NoteModel.jsx'
 import axios from 'axios'
@@ -7,6 +7,11 @@ import axios from 'axios'
 const Home = () => {
 // const navigate = useNavigate()
 const [isModel, setIsModel] = useState(false)  
+
+useEffect(() => {
+  
+}, [])
+
 const closeModal = () => {
   setIsModel(false)
 }
