@@ -10,6 +10,8 @@ const Home = () => {
   const [isModel, setIsModel] = useState(false);
   const [notes, setNotes] = useState([]);
   const [edit, setEdit] = useState(null)
+  const [query, setQuery] = useState('')
+  const [filter, setFilter] = useState('')
 
   const onEdit = (note) => {
     setEdit(note)
@@ -19,6 +21,14 @@ const Home = () => {
   useEffect(() => {
     fetchNote();
   }, []);
+
+  useEffect(() => {
+    setFilter(
+      notes.filter((note) =>
+        note.title.toLowerCase().includes(query.toLowerCase()) ||
+        note.description.toLowerCase().includes(query.toLowerCase())
+      ));
+  }, [query, notes]);
 
   const fetchNote = async () => {
     try {
@@ -97,11 +107,13 @@ const Home = () => {
 
   return (
     <div className="bg-gray-100 min-h-screen">
-      <Navbar />
+      <Navbar setQuery={setQuery}/>
      <div className='px-8 pt-4 grid grid-cols-1 md:grid-cols-3 gap-6'>
-      {notes.map(note =>(
+      {filter.length > 0 ? filter.map(note =>(
         <NoteCard note={note} onEdit={onEdit} deleteNote={deleteNote}  />
-      ))}
+      )):
+      <><p>No Notes</p></>
+      }
      </div>
       <button
         onClick={() => setIsModel(true)}

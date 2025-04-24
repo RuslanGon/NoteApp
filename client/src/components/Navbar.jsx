@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../contex/ContexProvider.jsx";
 
-const Navbar = () => {
+const Navbar = ({setQuery}) => {
 
 const {user} = useAuth()
 
@@ -14,6 +14,7 @@ const {user} = useAuth()
         <Link to="/">NoteApp</Link>
       </div>
       <input
+      onChange={e => setQuery(e.target.value)}
         className="bg-gray-600 px-4 py-2 rounded ml-4"
         type="text"
         placeholder="Search notes..."
