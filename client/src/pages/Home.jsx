@@ -11,16 +11,17 @@ const Home = () => {
   const [notes, setNotes] = useState([]);
 
   useEffect(() => {
-    const fetchNote = async () => {
-      try {
-        const { data } = await axios.get("http://localhost:5000/api/note");
-        setNotes(data.notes);
-      } catch (error) {
-        console.log(error);
-      }
-    };
     fetchNote();
   }, []);
+
+  const fetchNote = async () => {
+    try {
+      const { data } = await axios.get("http://localhost:5000/api/note");
+      setNotes(data.notes);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const closeModal = () => {
     setIsModel(false);
@@ -40,6 +41,7 @@ const Home = () => {
       );
       console.log("Note added successfully:", response.data);
       // setTimeout(() => navigate("/"), 1500);
+      fetchNote()
       closeModal();
     } catch (error) {
       console.error("Failed to add note:", error);
@@ -49,7 +51,7 @@ const Home = () => {
   return (
     <div className="bg-gray-100 min-h-screen">
       <Navbar />
-     <div className='grid grid-cols-1 md:grid-cols-3'>
+     <div className='px-8 pt-4 grid grid-cols-1 md:grid-cols-3'>
       {notes.map(note =>(
         <NoteCard note={note} />
       ))}
