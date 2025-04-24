@@ -4,9 +4,8 @@ import { useAuth } from "../contex/ContexProvider.jsx";
 
 const Navbar = ({setQuery}) => {
 
-const {user} = useAuth()
+const {user, handleLogout} = useAuth()
 
-  const handleLogout = () => {};
 
   return (
     <nav className="bg-gray-800 p-4 text-white flex justify-between items-center">

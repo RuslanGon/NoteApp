@@ -2,6 +2,7 @@ import express from 'express'
 import UsertModel from '../models/User.js'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken';
+import middleware from '../middleware/middleware.js'
 
 const router = express.Router()
 
@@ -71,6 +72,21 @@ router.post('/login', async (req, res) => {
   } catch (error) {
     console.error('Login error:', error);
     res.status(500).json({ message: 'Server error during login' });
+  }
+});
+
+router.get('/verify', middleware, async (req, res) => {
+  try {
+    return res.status(200).json({
+      success: true,
+      user: req.user,
+    });
+  } catch (error) {
+    console.error("Verification failed:", error);
+    return res.status(401).json({
+      success: false,
+      message: "Unauthorized",
+    });
   }
 });
 

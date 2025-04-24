@@ -6,6 +6,7 @@ import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom';
 import ContextProvider from './contex/ContexProvider.jsx';
 
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <ContextProvider>

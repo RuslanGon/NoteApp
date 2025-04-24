@@ -24,9 +24,10 @@ router.post('/add', middleware, async (req, res) => {
   }
 });
 
-router.get('/', async (req, res) => {
+router.get('/', middleware, async (req, res) => {
     try {
-      const notes = await NoteModel.find();
+      console.log(req.user);
+      const notes = await NoteModel.find({userId: req.user.id});
       return res.status(200).json({ notes }); 
     } catch (error) {
       console.log(error);

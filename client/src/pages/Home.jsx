@@ -32,7 +32,13 @@ const Home = () => {
 
   const fetchNote = async () => {
     try {
-      const { data } = await axios.get("http://localhost:5000/api/note");
+      const token = localStorage.getItem("token");
+
+      const { data } = await axios.get("http://localhost:5000/api/note", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setNotes(data.notes);
     } catch (error) {
       console.log(error);
