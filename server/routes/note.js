@@ -46,12 +46,30 @@ router.get('/', async (req, res) => {
       if (!updatedNote) {
         return res.status(404).json({ message: 'Note not found' });
       }
-      
+
       res.status(200).json({ message: 'Note updated', note: updatedNote });
     } catch (error) {
       console.error('Error updating note:', error);
       res.status(500).json({ message: 'Internal server error' });
     }
   });
+
+  router.delete('/:id', async (req, res) => {
+    try {
+      const { id } = req.params;
+  
+      const deletedNote = await NoteModel.findByIdAndDelete(id);
+  
+      if (!deletedNote) {
+        return res.status(404).json({ message: 'Note not found' });
+      }
+  
+      res.json({ message: 'Note deleted successfully', note: deletedNote });
+    } catch (error) {
+      console.error('Error deleting note:', error);
+      res.status(500).json({ message: 'Server error' });
+    }
+  });
+  
 
 export default router;
