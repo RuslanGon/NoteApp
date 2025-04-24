@@ -9,6 +9,12 @@ const Home = () => {
   // const navigate = useNavigate()
   const [isModel, setIsModel] = useState(false);
   const [notes, setNotes] = useState([]);
+  const [edit, setEdit] = useState(null)
+
+  const onEdit = (note) => {
+    setEdit(note)
+    setIsModel(true)
+  }
 
   useEffect(() => {
     fetchNote();
@@ -48,12 +54,32 @@ const Home = () => {
     }
   };
 
+  const editNote = async (id, title, description) => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await axios.put(
+        `http://localhost:5000/api/note/${id}`,
+        { title, description },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log("Note updated:", response.data);
+      fetchNote();
+      closeModal();
+    } catch (error) {
+      console.error("Failed to update note:", error);
+    }
+  };
+
   return (
     <div className="bg-gray-100 min-h-screen">
       <Navbar />
      <div className='px-8 pt-4 grid grid-cols-1 md:grid-cols-3 gap-6'>
       {notes.map(note =>(
-        <NoteCard note={note} />
+        <NoteCard note={note} onEdit={onEdit} />
       ))}
      </div>
       <button
@@ -62,7 +88,8 @@ const Home = () => {
       >
         +
       </button>
-      {isModel && <NoteModel closeModal={closeModal} addNote={addNote} />}
+      {isModel && <NoteModel closeModal={closeModal} addNote={addNote} edit={edit}
+       editNote= {editNote} />}
     </div>
   );
 };
