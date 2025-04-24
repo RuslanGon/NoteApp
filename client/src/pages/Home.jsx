@@ -4,6 +4,7 @@ import NoteModel from '../components/NoteModel.jsx'
 import axios from 'axios'
 import NoteCard from '../components/NoteCard.jsx';
 // import { useNavigate } from 'react-router-dom'
+import {toast} from 'react-toastify'
 
 const Home = () => {
   // const navigate = useNavigate()
@@ -105,7 +106,7 @@ const Home = () => {
   
       console.log("Note deleted:", response.data);
       fetchNote(); 
-      // closeModal(); 
+      toast.success('note deleted')
     } catch (error) {
       console.error("Failed to delete note:", error);
     }
