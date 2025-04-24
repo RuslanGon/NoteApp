@@ -51,7 +51,7 @@ const Home = () => {
   return (
     <div className="bg-gray-100 min-h-screen">
       <Navbar />
-     <div className='px-8 pt-4 grid grid-cols-1 md:grid-cols-3'>
+     <div className='px-8 pt-4 grid grid-cols-1 md:grid-cols-3 gap-6'>
       {notes.map(note =>(
         <NoteCard note={note} />
       ))}
