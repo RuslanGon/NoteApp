@@ -35,7 +35,8 @@ const Home = () => {
     try {
       const token = localStorage.getItem("token");
 
-      const { data } = await axios.get("http://localhost:5000/api/note", {
+      const { data } = await axios.get('https://noteapp-4ayp.onrender.com/api/note', {
+        // http://localhost:5000/api/note
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -54,7 +55,8 @@ const Home = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.post(
-        "http://localhost:5000/api/note/add",
+        "https://noteapp-4ayp.onrender.com/api/note/add",
+        // http://localhost:5000/api/note/add
         { title, description },
         {
           headers: {
@@ -75,7 +77,8 @@ const Home = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.put(
-        `http://localhost:5000/api/note/${id}`,
+        `https://noteapp-4ayp.onrender.com/api/note/${id}`,
+        // http://localhost:5000/api/note/${id}
         { title, description },
         {
           headers: {
@@ -96,7 +99,8 @@ const Home = () => {
       const token = localStorage.getItem("token");
   
       const response = await axios.delete(
-        `http://localhost:5000/api/note/${id}`,
+        `https://noteapp-4ayp.onrender.com/api/note/${id}`,
+        // http://localhost:5000/api/note/${id}
         {
           headers: {
             Authorization: `Bearer ${token}`,

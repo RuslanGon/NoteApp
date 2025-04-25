@@ -15,7 +15,8 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault(); 
   try {
-    const response = await axios.post('http://localhost:5000/api/auth/login', {email, password})
+    const response = await axios.post("https://noteapp-4ayp.onrender.com/api/auth/login", {email, password})
+    // http://localhost:5000/api/auth/login
     console.log('Login success:', response.data)
     setSuccessMessage('Login successful! Logining...');
     login(response.data.user)

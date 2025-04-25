@@ -13,7 +13,8 @@ const navigate = useNavigate()
 const handleSubmit = async (e) => {
   e.preventDefault(); 
 try {
-  const response = await axios.post('http://localhost:5000/api/auth/register', {name, email, password})
+  const response = await axios.post('https://noteapp-4ayp.onrender.com/api/auth/register', {name, email, password})
+  // 'http://localhost:5000/api/auth/register'
   console.log('Registration success:', response.data)
   setSuccessMessage('Registration successful! Redirecting...');
   setTimeout(() => navigate('/login'), 1500)
